@@ -40,3 +40,11 @@
 127.0.0.1 - - [31/May/2015:23:20:20 -0500] "GET /webDashboards/pieChart?recibido=1.0&recibir=99.0 HTTP/1.1" 200 9153
 127.0.0.1 - - [31/May/2015:23:20:20 -0500] "GET /webDashboards/img/received-on.png HTTP/1.1" 304 -
 127.0.0.1 - - [31/May/2015:23:20:20 -0500] "GET /webDashboards/img/receiving-off.png HTTP/1.1" 304 -
+127.0.0.1 - - [31/May/2015:23:21:21 -0500] "GET /webDashboards/Recibo HTTP/1.1" 200 4504
+127.0.0.1 - - [31/May/2015:23:21:21 -0500] "GET /webDashboards/img/available-off.png HTTP/1.1" 304 -
+127.0.0.1 - - [31/May/2015:23:21:21 -0500] "GET /webDashboards/img/receiving-on.png HTTP/1.1" 304 -
+127.0.0.1 - - [31/May/2015:23:21:21 -0500] "GET /webDashboards/img/received-off.png HTTP/1.1" 304 -
+127.0.0.1 - - [31/May/2015:23:21:22 -0500] "GET /webDashboards/img/receiving-off.png HTTP/1.1" 304 -
+127.0.0.1 - - [31/May/2015:23:21:22 -0500] "GET /webDashboards/img/received-on.png HTTP/1.1" 304 -
+127.0.0.1 - - [31/May/2015:23:21:25 -0500] "GET /webDashboards/pieChart?recibido=100.0&recibir=0.0 HTTP/1.1" 200 8714
+127.0.0.1 - - [31/May/2015:23:21:25 -0500] "GET /webDashboards/pieChart?recibido=1.0&recibir=99.0 HTTP/1.1" 200 9148
