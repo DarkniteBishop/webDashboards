@@ -71,7 +71,10 @@ public class ReceivingDashboards extends HttpServlet {
         //out.println("response.setIntHeader(\"Refresh\", 10);");
         //out.println("%>");
         out.println("<center>");
-        out.println("<table border=1>");
+        out.println("<table border=1 width=\"1200px\">");
+        out.println("<tr>");
+        out.println("<td colspan=\"2\" valign=\"bottom\"><font face=\"Arial\" size=\"6\"><b>Area de Recibo</b></font><img src=\"img/fah_banner.jpg\" align=\"right\" /></td>");
+        out.println("</tr>");
         
         col = 1;
         while(res.next()) {
@@ -81,55 +84,67 @@ public class ReceivingDashboards extends HttpServlet {
             String proveedor = res.getString("first_name");
             String porcentaje_recibido = res.getString("percentage_rcvqty");
             String porcentaje_recibir = res.getString("percentage_to_rcvqty");
-            String esperado = res.getString("expqty");
-            String recibido = res.getString("rcvqty");
-            String por_recibir = res.getString("to_rcvqty");
+            int esperado = res.getInt("expqty");
+            int recibido = res.getInt("rcvqty");
+            int por_recibir = res.getInt("to_rcvqty");
+            int sku = res.getInt("sku");
+            String inicio = res.getString("arrdte");
+            String fin = res.getString("close_dte");
             
             if(col%2 != 0){
                 out.println("<tr>");
             }
-            out.println("<td>");
+            out.println("<td width=\"600px\">");
             out.println("<center>");
             out.println("<form id=\"" + anden + "\">");    
-            out.println("<p>");
-            out.println("<b>Ubicacion:</b><input type=\"text\" value=\"" + anden + "\" id=\"" + anden + "\" readonly=\"readonly\" size=\"8\" />");
-            out.println("<b>OC:</b><input type=\"text\" value=\"" + oc + "\" id=\"OC" + anden + "\" readonly=\"readonly\" size=\"10\" />");
-            out.println("<b>Proveedor:</b><input type=\"text\" value=\"" + proveedor + "\" id=\"SUP" + anden + "\" readonly=\"readonly\" size=\"25\" />");
-            out.println("</p>");
+            out.println("<p><font face=\"Arial\"><b>");
+            out.println("OC:<input type=\"text\" value=\"" + oc + "\" id=\"OC" + anden + "\" readonly=\"readonly\" size=\"10\" />");
+            out.println("Proveedor:<input type=\"text\" value=\"" + proveedor + "\" id=\"SUP" + anden + "\" readonly=\"readonly\" size=\"25\" />");
+            out.println("<font size=\"5\" >" + anden + "</font>");
+            out.println("</b></font></p>");
             out.println("</form>");  
             out.println("<table>");
             out.println("<tr>");
-            out.println("<td rowspan=\"3\"><img src=\"pieChart?recibido=" + porcentaje_recibido + "&recibir=" + porcentaje_recibir + "\" border=\"0\" /></td>");
+            out.println("<td rowspan=\"2\">");
+            out.println("<center>");
+            out.println("<table border=1 align=\"center\">");
+            out.println("<tr>");
+            out.println("<th>Usuario</th>");
+            out.println("<th>Piezas</th>");
+            out.println("</tr>");
+            
+            out.println("<tr>");
+            out.println("<td>" + esperado + "</td>");
+            out.println("<td>" + recibido + "</td>");
+            out.println("</tr>");
+            
+            out.println("</table>");
+            out.println("</center>");
+            out.println("</td>");
+            out.println("<td rowspan=\"2\"><img src=\"pieChart?recibido=" + porcentaje_recibido + "&recibir=" + porcentaje_recibir + "\" border=\"0\" /></td>");
            
             if(Double.parseDouble(porcentaje_recibido) == 100){
                 out.println("<td><img src=\"img/available-off.png\" width=\"80\" height=\"80\" /></td>");
                 out.println("</tr>");
                 out.println("<tr>");
                 out.println("<td><img src=\"img/receiving-off.png\" width=\"80\" height=\"80\" /></td>");
-                out.println("</tr>");
-                out.println("<tr>");
-                out.println("<td><img src=\"img/received-on.png\" width=\"80\" height=\"80\" /></td>");
             }
             else if(Double.parseDouble(porcentaje_recibido) < 100 && Double.parseDouble(porcentaje_recibido) >= 0){
                 out.println("<td><img src=\"img/available-off.png\" width=\"80\" height=\"80\" /></td>");
                 out.println("</tr>");
                 out.println("<tr>");
                 out.println("<td><img src=\"img/receiving-on.png\" width=\"80\" height=\"80\" /></td>");
-                out.println("</tr>");
-                out.println("<tr>");
-                out.println("<td><img src=\"img/received-off.png\" width=\"80\" height=\"80\" /></td>");
             }
-            else if(Double.parseDouble(esperado) == 0 ){
+            else if(esperado == 0 ){
                 out.println("<td><img src=\"img/available-on.png\" width=\"80\" height=\"80\" /></td>");
                 out.println("</tr>");
                 out.println("<tr>");
                 out.println("<td><img src=\"img/receiving-off.png\" width=\"80\" height=\"80\" /></td>");
-                out.println("</tr>");
-                out.println("<tr>");
-                out.println("<td><img src=\"img/received-off.png\" width=\"80\" height=\"80\" /></td>");
             }
             out.println("</tr>");
             out.println("<tr>");
+            out.println("<td>");
+            out.println("</td>");
             out.println("<td>");
             out.println("<center>");
             out.println("<table border=1 align=\"center\">");
@@ -137,16 +152,21 @@ public class ReceivingDashboards extends HttpServlet {
             out.println("<th>Esperado</th>");
             out.println("<th>Recibido</th>");
             out.println("<th>Por Recibir</th>");
+            out.println("<th>Sku's</th>");
             out.println("</tr>");
             out.println("<tr>");
             out.println("<td>" + esperado + "</td>");
             out.println("<td>" + recibido + "</td>");
             out.println("<td>" + por_recibir + "</td>");
+            out.println("<td>" + sku + "</td>");
             out.println("</tr>");
             out.println("</table>");
             out.println("</center>");
             out.println("</td>");
-            out.println("<td><center><font face=\"Arial\" size=\"25\">R" + anden.substring(7,9) + "</font></center></td>");
+            out.println("<td>");
+            out.println("Inicio: <input type=\"text\" value=\"" + inicio + "\" readonly=\"readonly\" size=\"8\"><br>");
+            out.println("Fin: <input type=\"text\" value=\"" + fin + "\" readonly=\"readonly\" size=\"8\">" );
+            out.println("</td>");
             out.println("</tr>");
             out.println("</table>");
             out.println("</center>");
